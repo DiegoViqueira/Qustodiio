@@ -36,13 +36,12 @@ b2 --build-dir=MYBOOST
 
 
 ## Build
+
 Makefile Fixes:
-
-- Edit Makefile in Project root dir and replace this 3 libraries for the right builded in boost/stage/lib
-  -lboost_filesystem-mgw73-mt-x64-1_67 
-  -lboost_system-mgw73-mt-x64-1_67 
-  -lboost_thread-mgw73-mt-x64-1_67
-
+Edit Makefile in Project root dir and replace this 3 libraries for the right builded in boost/stage/lib
+  - boost_filesystem-mgw73-mt-x64-1_67 
+  - boost_system-mgw73-mt-x64-1_67 
+  - boost_thread-mgw73-mt-x64-1_67
 
 Compile Proyect:
 ```
