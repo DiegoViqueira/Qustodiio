@@ -25,6 +25,8 @@ Test for Qustodio
 
 ## Build Boost
 
+* uncompress bost.zip
+
 ```
 cd boost
 bootstrap.bat gcc
