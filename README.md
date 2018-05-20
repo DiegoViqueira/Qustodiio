@@ -37,6 +37,7 @@ b2 --build-dir=MYBOOST
 
 Compile Proyect:
 ```
+make dirs
 make all
 ```
 
