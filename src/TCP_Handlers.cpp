@@ -1,5 +1,6 @@
 
 #include "TCP_Handlers.hpp"
+#include "Protocol.hpp"
 
 using namespace std;
 void session(tcp::socket sock)
@@ -10,19 +11,22 @@ void session(tcp::socket sock)
 	cout <<"["<< boost::this_thread::get_id()<< "]"<<" New Connection from :" << sock.remote_endpoint().address().to_string()  << endl;
     for (;;)
     {
-      char data[max_length];
+      char data[sizeof(Header)];
+	  
+	  Header temp_header;
 
       boost::system::error_code error;
-      size_t length = sock.read_some(boost::asio::buffer(data), error);
+      size_t length = sock.read_some(boost::asio::buffer((void *)&temp_header,sizeof(Header)), error);
 	  
       if (error == boost::asio::error::eof)
         break; // Connection closed cleanly by peer.
       else if (error)
         throw boost::system::system_error(error); // Some other error.
 
+	
       boost::asio::write(sock, boost::asio::buffer(data, length));
 	  
-	  cout << "Message Received from Client: " << data << endl;
+	cout << "Message Received from Client type[" << temp_header.m_msg_type << "] size[" << temp_header.m_size <<"]"<< endl;
     }
   }
   catch (std::exception& e)
@@ -43,8 +47,11 @@ void Session::start()
 		{
 		  char data[max_length];
 
+		  Header temp_header;
+
 		  boost::system::error_code error;
-		  size_t length = m_socket.read_some(boost::asio::buffer(data), error);
+          size_t length = m_socket.read_some(boost::asio::buffer((void *)&temp_header,sizeof(Header)), error);
+	  
 		  
 		  if (error == boost::asio::error::eof)
 			break; // Connection closed cleanly by peer.
@@ -53,7 +60,7 @@ void Session::start()
 
 		  boost::asio::write(m_socket, boost::asio::buffer(data, length));
 		  
-		  cout << "Message Received from Client: " << data << endl;
+		  cout << "Message Received from Client type[" << (int)temp_header.m_msg_type << "] size[" << temp_header.m_size <<"]"<< endl;
 		}
 	  }
 	  catch (std::exception& e)

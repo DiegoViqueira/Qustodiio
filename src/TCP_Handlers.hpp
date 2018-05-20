@@ -1,3 +1,10 @@
+//============================================================================
+// Name        : TCP_Handlers.hpp
+// Author      : Diego Viqueira
+// Version     :
+// Copyright   :
+// Description : Client/Server TCP Connection Classes
+//============================================================================
 
 #include <cstdlib>
 #include <iostream>

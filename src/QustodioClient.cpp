@@ -7,6 +7,8 @@
 #include "CmdOptionsParser.hpp"
 #include "MakeString.hpp"
 #include "TCP_Handlers.hpp"
+#include "Protocol.hpp"
+
 
 using namespace std;
 
@@ -58,7 +60,10 @@ int main(int argc, char **argv) {
 	    char request[max_length];
 	    std::cin.getline(request, max_length);
 	    size_t request_length = std::strlen(request);
-	    boost::asio::write(s, boost::asio::buffer(request, request_length));
+		
+		
+		Header myheader(0x1,256) ;
+	    boost::asio::write(s, boost::asio::buffer(&myheader, sizeof(Header)));
 
 	    char reply[max_length];
 	    size_t reply_length = boost::asio::read(s,
