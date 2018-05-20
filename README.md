@@ -8,7 +8,7 @@ Test for Qustodio
 ### Filesystem Structure
 
 ```
-  + -- /boos ( Boost Framework Utils. )
+  + -- /boost ( Boost Framework Utils. )
   |
   + -- /common ( Common Headears for proyect. )
   |
@@ -21,11 +21,19 @@ Test for Qustodio
 
 ## Deployment & Build
 
++ Clone repository localy 
 
 Compile Proyect:
 ```
 make all
 ```
+
+Clean Proyect:
+```
+make clean
+```
+
+
 
 ## Running the tests
 
