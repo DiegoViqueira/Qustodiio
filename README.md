@@ -52,8 +52,16 @@ make clean
 
 ## Running the tests
 
+cd build 
 
-
+Run Server
+```
+QustodioServer.exe
+```
+Run Client
+```
+QustodioCient.exe -f prueba.dat
+```
 ## Authors
 
 * **Diego Viqueira** - *Initial work* 
