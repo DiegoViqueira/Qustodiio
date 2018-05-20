@@ -22,11 +22,11 @@ Test for Qustodio
 ## Deployment 
 
 + Clone repository localy
-+ Download Boost C++ Framework (https://www.boost.org/users/download/)
++ Download Boost C++ Framework (https://www.boost.org/users/download/) in Git project repository.
 
 ## Build Boost
 
-* uncompress bost_[Version].zip
+* uncompress bost_[Version].zip into /boost 
 
 ```
 cd boost
