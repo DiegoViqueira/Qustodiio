@@ -23,6 +23,16 @@ Test for Qustodio
 
 + Clone repository localy 
 
+## Build Boost
+
+```
+cd boost
+bootstrap.bat gcc
+b2 --build-dir=MYBOOST
+
+```
+
+
 ## Build
 
 Compile Proyect:
