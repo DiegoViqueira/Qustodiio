@@ -19,9 +19,11 @@ Test for Qustodio
   + -- /build ( Build Directory for Executables.  )
 ```  
 
-## Deployment & Build
+## Deployment 
 
 + Clone repository localy 
+
+## Build
 
 Compile Proyect:
 ```
