@@ -5,6 +5,19 @@ Test for Qustodio
   - GCC > 5 
   - Makefile 
 
+### Filesystem Structure
+
+  + -- /boos ( Boost Framework Utils. )
+  |
+  + -- /common ( Common Headears for proyect. )
+  |
+  + -- /src ( Sources Files for proyect. )
+  :
+  + -- /obj ( Temporary repository for builded Objects. )
+  :
+  + -- /build ( Build Directory Executables builded. )
+  
+
 ## Deployment & Build
 
 
