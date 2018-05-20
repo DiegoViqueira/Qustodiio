@@ -1,8 +1,10 @@
 # Qustodio
 	Test for Qustodio
 	
-	client-server OOP application in C++. The client is in charge of analyzing router logs and sending questionable activitiestothe server. 
-	The server application will receive those reports from many clients simultaneouslyand store them in memory to process them later. 
+	client-server OOP application in C++. The client is in charge of analyzing router logs and sending questionable 
+	activities to the server. 
+	The server application will receive those reports from many clients simultaneouslyand store them in memory to 
+	process them later. 
 
 ### Prerequisites
   - GCC > 5 
