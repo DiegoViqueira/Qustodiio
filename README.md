@@ -5,20 +5,26 @@ Test for Qustodio
   - GCC > 5 
   - Makefile 
 
-## Deployment
+## Deployment & Build
 
-Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [boost](https://www.boost.org/) - Boost Framework used
+Compile Proyect:
+```
+make all
+```
 
 ## Running the tests
+
 
 
 ## Authors
 
 * **Diego Viqueira** - *Initial work* 
+
+## Built With
+
+* [boost](https://www.boost.org/) - Boost Framework.
+
 
 ## License
 
