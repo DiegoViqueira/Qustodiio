@@ -10,13 +10,13 @@ Test for Qustodio
 ```
   + -- /boost ( Boost Framework Utils. )
   |
-  + -- /common ( Common Headears for proyect. )
+  + -- /common ( Common Headears. )
   |
-  + -- /src ( Sources Files for proyect. )
+  + -- /src ( Sources Files. )
   :
   + -- /obj ( Temporary repository for builded Objects. )
   :
-  + -- /build ( Build Directory Executables builded. )
+  + -- /build ( Build Directory for Executables.  )
 ```  
 
 ## Deployment & Build
