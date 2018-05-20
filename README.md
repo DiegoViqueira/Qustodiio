@@ -1,5 +1,8 @@
-# Qustodiio
-Test for Qustodio
+# Qustodio
+	Test for Qustodio
+	
+	client-server OOP application in C++. The client is in charge of analyzing router logs and sending questionable activitiestothe server. 
+	The server application will receive those reports from many clients simultaneouslyand store them in memory to process them later. 
 
 ### Prerequisites
   - GCC > 5 
@@ -32,7 +35,6 @@ Test for Qustodio
 cd boost
 bootstrap.bat gcc
 b2 --build-dir=MYBOOST
-
 ```
 
 
