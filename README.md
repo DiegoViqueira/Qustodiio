@@ -24,6 +24,20 @@
   + -- /build ( Build Directory for Executables.  )
 ```  
 
+## Internal Protocol
+
++ Message Sequence
+
+```
+	CLIENT                    		SERVER
+          |                          		   |
+	  +---   Request (MSG TYPE = 0) ---------> +
+	  |					   |
+	  + <---- Responce (MSG TYPE = 1) ---------+
+
+```
+
+
 ## Deployment 
 
 + Clone repository localy
