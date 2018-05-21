@@ -105,16 +105,21 @@ make clean
 
 ## Running the tests
 
-cd build 
+
 
 Run Server
 ```
-QustodioServer.exe
+build\QustodioServer.exe
 ```
-Run Client
+Run Client 1
 ```
-QustodioCient.exe -f prueba.dat
+build\QustodioCient.exe -f sample.log
 ```
+Run Client 2
+```
+build\QustodioCient.exe -f sample1.log
+```
+
 ## Authors
 
 * **Diego Viqueira** - *Initial work* 
