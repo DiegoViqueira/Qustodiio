@@ -39,14 +39,23 @@
 
 + Notation
 
-  Request
-  -------
+  Common Header:
+	
+	Field		Size Octects         Type                  Description
+	Msg Type            1 var	     uint8              Message type 0 = Request / 1 = Responce
+	Msg Size            4 bytes          uint32             Message variable data Size
+	
+  Request:
   
+  	Field		Size Octects         Type                  Description
+        data               variable       C-Octet String         Data of Message
   
-  Responce
-  --------
-
-
+  Responce:
+    
+  	Field		Size Octects         Type                  Description
+        data               variable       C-Octet String         Data of Message
+	
+	
 ## Deployment 
 
 + Clone repository localy
