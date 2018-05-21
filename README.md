@@ -24,6 +24,48 @@
   + -- /build ( Build Directory for Executables.  )
 ```  
 
+## Internal Protocol
+
++ Message Sequence
+
+```
+	CLIENT                    		SERVER
+          |                          		   |
+	  +---   Request (MSG TYPE = 0) ---------> +
+	  |					   |
+	  + <---- Responce (MSG TYPE = 1) ---------+
+
+```
+
++ Field size Notation
+
+```
+  Common Header:
+	
+	Field		Size Octects         Type                  Description
+	Msg Type            1 var	     uint8              Message type 0 = Request / 1 = Responce
+	Msg Size            4 bytes          uint32             Message variable data Size
+	
+  Request:
+  
+  	Field		Size Octects         Type                  Description
+        data               variable       C-Octet String         Data of Message
+  
+  Responce:
+    
+  	Field		Size Octects         Type                  Description
+        data               variable       C-Octet String         Data of Message
+	
+```
+
++ Message Content
+
+```
+  Request  :  Common Header +  Request
+  Responce :  Common Header +  Responce
+```
+
+
 ## Deployment 
 
 + Clone repository localy
