@@ -24,7 +24,7 @@ SRCS  =  $(SRCDIR)/QustodioServer.cpp $(SRCDIR)/TCP_Handlers.cpp $(SRCDIR)/Proto
 OBJS    = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 # Files and folders for client
-SRCS_CLI    =  $(SRCDIR)/QustodioClient.cpp $(SRCDIR)/TCP_Handlers.cpp $(SRCDIR)/Protocol.cpp
+SRCS_CLI    =  $(SRCDIR)/QustodioClient.cpp $(SRCDIR)/TCP_Handlers.cpp $(SRCDIR)/Protocol.cpp  $(SRCDIR)/FileReader.cpp
 OBJS_CLI    = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS_CLI))
 
 # Targets

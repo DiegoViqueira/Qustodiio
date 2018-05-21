@@ -17,7 +17,7 @@
 using boost::asio::ip::tcp;
 
 
-const int max_length = 1024;
+const int max_length = 2048;
 
 void session(tcp::socket sock);
 

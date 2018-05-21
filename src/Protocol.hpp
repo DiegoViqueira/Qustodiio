@@ -64,15 +64,15 @@ class Request
 	//Protocol Encoder & Decoder 
 	
 	// Getters
-	size_t size(){ return m_device.size()+ m_url.size()+ m_timestamp.size();};
+	size_t size();
 	std::string  getDevice() { return m_device; }
 	std::string  getURL() { return m_url; }
 	std::string  getTimestamp() { return m_timestamp; }
 	
 	//Setters
-	void setDevice( const std::string& dev ){ m_device= dev ; h_.setSize(size());}
-	void setURL	( const std::string& url){ m_url= url ;h_.setSize(size());}
-	void setTimestamp( const std::string& tmstmp ){ m_timestamp= tmstmp;h_.setSize(size());}
+	void setDevice( const std::string& dev );
+	void setURL	( const std::string& url);
+	void setTimestamp( const std::string& tmstmp );
 	
 	//Payload
 	const char* payload();

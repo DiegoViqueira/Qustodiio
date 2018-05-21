@@ -1,4 +1,5 @@
 
+#include <regex>
 #include "TCP_Handlers.hpp"
 #include "Protocol.hpp"
 
@@ -13,6 +14,9 @@ void Session::start()
 	  {
 		  
 		cout <<"["<< boost::this_thread::get_id()<< "]"<<" New Connection from :" << m_socket.remote_endpoint().address().to_string()  << endl;
+		
+		//Regular expression Patterns
+		std::regex self_regex("porn|xxx|sex|Bieber",std::regex_constants::ECMAScript | std::regex_constants::icase);		  
 		
 		// Iterate for Messages
 		for (;;)
@@ -39,9 +43,13 @@ void Session::start()
 				  Request temp_request(data,request_header.getSize());
 
 				  // Printing Data
-				  cout << "New Request size[" << temp_request.size() <<"] payload size ["<< temp_request.payloadSize()<<"]" 
+				  /*cout <<"["<< boost::this_thread::get_id()<< "]" << "New Request size[" << temp_request.size() <<"] payload size ["<< temp_request.payloadSize()<<"]" 
 				   << "[" << temp_request.getDevice()<<"]" << "[" << temp_request.getURL()<<"]"<< "[" << temp_request.getTimestamp()<<"]"<< endl; 
-
+				  */
+				  if (std::regex_search(temp_request.getURL(), self_regex)) 
+				  {
+					 std::cout <<"["<< boost::this_thread::get_id()<< "]" << "OFFENCIVE WORDS IN[" << temp_request.getDevice()<<"]" << "[" << temp_request.getURL()<<"]"<< "[" << temp_request.getTimestamp()<<"]" << endl;
+				  }
 
 				  //Send Responce
 				  Responce protocol_responce("OK") ;
@@ -66,23 +74,33 @@ void Session::start()
 
 
 void Server::run()
+{
+		
+	try
 	{
-		//Start Listening Connections
-		cout<<"TCP Server Start Listening on port ["<< m_port <<"]" << endl;
-		tcp::acceptor a(m_io_service, tcp::endpoint(tcp::v4(), m_port));
-		for (;;)
-		{
-			//create new Session
-			Session::pointer new_Session = Session::create(m_io_service);
-			
-			//Accept New Connection
-			a.accept(new_Session->socket());
-			
-			//Launch Thread for New Session
-			std::thread(boost::bind(&Session::start, new_Session)).detach();
-			
-			
-		}
+
+			//Start Listening Connections
+			cout<<"TCP Server Start Listening on port ["<< m_port <<"]" << endl;
+			tcp::acceptor a(m_io_service, tcp::endpoint(tcp::v4(), m_port));
+			for (;;)
+			{
+				//create new Session
+				Session::pointer new_Session = Session::create(m_io_service);
+					
+				//Accept New Connection
+				a.accept(new_Session->socket());
+				
+				//Launch Thread for New Session
+				std::thread(boost::bind(&Session::start, new_Session)).detach();
+				
+				
+			}
 	}
+	catch (std::exception& e)
+	{
+	std::cerr << "Exception in thread: " << e.what() << "\n";
+	}
+	
+}
 
 

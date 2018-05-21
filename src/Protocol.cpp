@@ -40,7 +40,27 @@
             buffer_=0;
        }
 	   };
-	   
+	
+    void Request::setDevice( const std::string& dev )
+	{ 
+	  m_device= dev ; 
+	  h_.setSize(size());
+	  m_payload_size=sizeof(Header)+h_.getSize() ;
+	}
+	void Request::setURL( const std::string& url)
+	{ m_url= url ;
+	  h_.setSize(size() );
+	  m_payload_size=sizeof(Header)+h_.getSize() ;
+	}
+	
+	void Request::setTimestamp( const std::string& tmstmp )
+	{ m_timestamp= tmstmp;
+	  h_.setSize(size()  );
+	  m_payload_size=sizeof(Header)+h_.getSize() ;
+	}
+	
+	size_t Request::size(){ return m_device.size()+ m_url.size()+ m_timestamp.size() + 2 ; };
+	
 	//Payload
 	const char* Request::payload()
 	{

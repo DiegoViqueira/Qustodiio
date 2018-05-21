@@ -8,6 +8,7 @@
 #include "MakeString.hpp"
 #include "TCP_Handlers.hpp"
 #include "Protocol.hpp"
+#include "FileReader.hpp"
 
 
 using namespace std;
@@ -46,6 +47,14 @@ int main(int argc, char **argv) {
 	const std::string &filename = input.getCmdOption("-f");
 	cout << "Filename to Process: "<< filename << endl;
 
+	FileReader ProcessFile(filename);
+	
+	if (!ProcessFile.isOpen())
+	{
+		cout << "Unable to Open File: "<< filename << endl;
+		return -1;
+	}
+	
 	  try
 	  {
 
@@ -57,27 +66,41 @@ int main(int argc, char **argv) {
 		//Connect to the Server
 		boost::asio::connect(s, resolver.resolve({"localhost","42422"} ));
 
+		std::cout << "Connection with Server Stablished ..." << endl;
+		
+		
 	    std::cout << "Press Enter to start processiong...";
 	    char request[max_length];
 	    std::cin.getline(request, max_length);
 	    size_t request_length = std::strlen(request);
 		
+			
+		Request MyRequest;
 		
-		Request MyRequest("12:55:22:25","www.hotmail.com","1251281258");
-				
-		//Send Request to Server
-		boost::asio::write(s, boost::asio::buffer(MyRequest.payload(), MyRequest.payloadSize()));
+		//Leo todo el Archivo
+		
+		while( ProcessFile.getRequest(MyRequest) )
+		{
+		
+		   //Send Request to Server
+			boost::asio::write(s, boost::asio::buffer(MyRequest.payload(), MyRequest.payloadSize()));
 
-		//Read Responce Header
-		Header protocol_responce_Header;
-	    size_t reply_length = boost::asio::read(s,boost::asio::buffer((void *)&protocol_responce_Header,sizeof(Header)));
+			//Read Responce Header
+			Header protocol_responce_Header;
+			size_t reply_length = boost::asio::read(s,boost::asio::buffer((void *)&protocol_responce_Header,sizeof(Header)));
+			
+			//Read Responce Data
+			char data[max_length];
+			reply_length = boost::asio::read(s,boost::asio::buffer(&data,protocol_responce_Header.getSize()));
+			
+			Responce responce_from_server(data,protocol_responce_Header.getSize());
+			cout << "Message Received from Server  size[" << responce_from_server.size() <<"] payload size ["<< responce_from_server.payloadSize()<<"] Data["<< responce_from_server.getData()<<"]"<< endl;
+			
 		
-		//Read Responce Data
-		char data[max_length];
-		reply_length = boost::asio::read(s,boost::asio::buffer(&data,protocol_responce_Header.getSize()));
+		}
 		
-		Responce responce_from_server(data,protocol_responce_Header.getSize());
-	    cout << "Message Received from Server  size[" << responce_from_server.size() <<"] payload size ["<< responce_from_server.payloadSize()<<"] Data["<< responce_from_server.getData()<<"]"<< endl;
+		   	
+		
 		
 	  }
 	  catch (std::exception& e)
