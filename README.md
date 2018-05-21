@@ -61,8 +61,8 @@
 + Message Content
 
 ```
-  Request  :  Common Header +  Request Field
-  Responce :  Common Header +  Responce Field
+  Request  :  Common Header +  Request
+  Responce :  Common Header +  Responce
 ```
 
 
