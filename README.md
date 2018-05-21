@@ -120,6 +120,11 @@ Run Client 2
 build\QustodioCient.exe -f sample1.log
 ```
 
+## Console Output Example
+
+```
+[8dc]OFFENCIVE WORDS IN[device: c0-a0-39-6e-c8-8e][url: https://bieber.net/index.html][timestamp: 1397656830]
+```
 ## Authors
 
 * **Diego Viqueira** - *Initial work* 
