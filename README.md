@@ -39,6 +39,7 @@
 
 + Notation
 
+```
   Common Header:
 	
 	Field		Size Octects         Type                  Description
@@ -55,7 +56,8 @@
   	Field		Size Octects         Type                  Description
         data               variable       C-Octet String         Data of Message
 	
-	
+```
+
 ## Deployment 
 
 + Clone repository localy
