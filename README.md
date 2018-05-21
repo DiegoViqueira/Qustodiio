@@ -37,7 +37,7 @@
 
 ```
 
-+ Notation
++ Field size Notation
 
 ```
   Common Header:
@@ -57,6 +57,14 @@
         data               variable       C-Octet String         Data of Message
 	
 ```
+
++ Message Content
+
+```
+  Request  :  Common Header +  Request Field
+  Responce :  Common Header +  Responce Field
+```
+
 
 ## Deployment 
 
