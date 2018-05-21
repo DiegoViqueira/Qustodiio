@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 
 		boost::asio::io_service io_service;
 
-	    Server MyServer(io_service, 14000);
+	    Server MyServer(io_service, 42422);
 		
 		MyServer.run();
 	  }

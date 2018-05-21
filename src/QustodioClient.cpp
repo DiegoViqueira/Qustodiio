@@ -49,28 +49,36 @@ int main(int argc, char **argv) {
 	  try
 	  {
 
-
+		//Stablish Sockets and Resolvers
 	    boost::asio::io_service io_service;
-
 	    tcp::socket s(io_service);
 	    tcp::resolver resolver(io_service);
-	    boost::asio::connect(s, resolver.resolve({"localhost","14000"} ));
+	    
+		//Connect to the Server
+		boost::asio::connect(s, resolver.resolve({"localhost","42422"} ));
 
-	    std::cout << "Enter message: ";
+	    std::cout << "Press Enter to start processiong...";
 	    char request[max_length];
 	    std::cin.getline(request, max_length);
 	    size_t request_length = std::strlen(request);
 		
 		
-		Header myheader(0x1,256) ;
-	    boost::asio::write(s, boost::asio::buffer(&myheader, sizeof(Header)));
+		Request MyRequest("12:55:22:25","www.hotmail.com","1251281258");
+				
+		//Send Request to Server
+		boost::asio::write(s, boost::asio::buffer(MyRequest.payload(), MyRequest.payloadSize()));
 
-	    char reply[max_length];
-	    size_t reply_length = boost::asio::read(s,
-	        boost::asio::buffer(reply, request_length));
-	    std::cout << "Reply is: ";
-	    std::cout.write(reply, reply_length);
-	    std::cout << "\n";
+		//Read Responce Header
+		Header protocol_responce_Header;
+	    size_t reply_length = boost::asio::read(s,boost::asio::buffer((void *)&protocol_responce_Header,sizeof(Header)));
+		
+		//Read Responce Data
+		char data[max_length];
+		reply_length = boost::asio::read(s,boost::asio::buffer(&data,protocol_responce_Header.getSize()));
+		
+		Responce responce_from_server(data,protocol_responce_Header.getSize());
+	    cout << "Message Received from Server  size[" << responce_from_server.size() <<"] payload size ["<< responce_from_server.payloadSize()<<"] Data["<< responce_from_server.getData()<<"]"<< endl;
+		
 	  }
 	  catch (std::exception& e)
 	  {

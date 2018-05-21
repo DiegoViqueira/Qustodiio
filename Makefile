@@ -20,11 +20,11 @@ INCLUDE = -I ./common -I ./boost
 INCLUDE_LIBS = -L ./boost/stage/lib
 
 # Files and folders for server
-SRCS  =  $(SRCDIR)/QustodioServer.cpp $(SRCDIR)/TCP_Handlers.cpp
+SRCS  =  $(SRCDIR)/QustodioServer.cpp $(SRCDIR)/TCP_Handlers.cpp $(SRCDIR)/Protocol.cpp
 OBJS    = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 # Files and folders for client
-SRCS_CLI    =  $(SRCDIR)/QustodioClient.cpp $(SRCDIR)/TCP_Handlers.cpp 
+SRCS_CLI    =  $(SRCDIR)/QustodioClient.cpp $(SRCDIR)/TCP_Handlers.cpp $(SRCDIR)/Protocol.cpp
 OBJS_CLI    = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS_CLI))
 
 # Targets
