@@ -36,10 +36,15 @@ int main(int argc, char **argv) {
 	 try
 	  {
 
-		boost::asio::io_service io_service;
+	    //Building Reporter Instance
+		std::shared_ptr<Reporter> spReporter = Reporter::getInstance();
 
-	    Server MyServer(io_service, 42422);
+		//Launch Runing process in new thread
+		std::thread(boost::bind(&Reporter::run, spReporter)).detach();
 		
+	    //Starting The Server
+		boost::asio::io_service io_service;
+	    Server MyServer(io_service, 42422);
 		MyServer.run();
 	  }
 	  catch (std::exception& e)

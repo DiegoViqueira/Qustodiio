@@ -6,13 +6,23 @@
 using namespace std;
 
 
+Session::~Session() 
+{
+	
+	//delete the Consumer reporter
+	Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
+};
+
 void Session::start() 
 {
         
 
    try
 	  {
-		  
+		//register as a Consumer Reporter
+        std::shared_ptr<Reporter>  spReporter = Reporter::getInstance();
+		
+		spReporter->register_consumer( get_strID( boost::this_thread::get_id() ),shared_from_this());
 		cout <<"["<< boost::this_thread::get_id()<< "]"<<" New Connection from :" << m_socket.remote_endpoint().address().to_string()  << endl;
 		
 		//Regular expression Patterns
@@ -48,6 +58,8 @@ void Session::start()
 				  */
 				  if (std::regex_search(temp_request.getURL(), self_regex)) 
 				  {
+					 //increment counter
+					m_quest_activities++;					 
 					 std::cout <<"["<< boost::this_thread::get_id()<< "]" << "OFFENCIVE WORDS IN[" << temp_request.getDevice()<<"]" << "[" << temp_request.getURL()<<"]"<< "[" << temp_request.getTimestamp()<<"]" << endl;
 				  }
 
@@ -68,8 +80,10 @@ void Session::start()
 	  catch (std::exception& e)
 	  {
 		std::cerr << "Exception in thread: " << e.what() << "\n";
+		Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
 	  }
 	  
+	  //Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
 }
 
 
@@ -85,7 +99,7 @@ void Server::run()
 			for (;;)
 			{
 				//create new Session
-				Session::pointer new_Session = Session::create(m_io_service);
+				std::shared_ptr<Session> new_Session = std::make_shared<Session>(m_io_service);
 					
 				//Accept New Connection
 				a.accept(new_Session->socket());

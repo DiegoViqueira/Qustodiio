@@ -13,6 +13,9 @@
 #include <boost/asio.hpp>
 #include <iostream>
 #include <boost/thread/thread.hpp>
+#include <boost/atomic.hpp>
+
+#include "Reporter.hpp"
 
 using boost::asio::ip::tcp;
 
@@ -22,28 +25,40 @@ const int max_length = 2048;
 void session(tcp::socket sock);
 
 
-class Session
+class Session: public Consumer , public  std::enable_shared_from_this<Session>
 {
 public:
-    typedef boost::shared_ptr<Session> pointer;
 
-    static pointer create(boost::asio::io_service &io) {
-        return pointer(new Session(io));
-    }
-
-    ~Session() {}
-
-    tcp::socket &socket() { return m_socket; }
-
-    void start();
-protected:
+    //Constructor
     Session(boost::asio::io_service &io)
-        : m_socket(io) {
+        : m_socket(io),m_quest_activities(0) {
     }
 
+	//Destructor
+    ~Session();
+	
+	//get the socket
+    tcp::socket &socket() { return m_socket; };
+	//Start the session
+    void start();
+	
+	//Implementation of Consumer for Reporter
+	int getStatistics() { return m_quest_activities; };
+protected:
+
+
+	std::string get_strID( boost::thread::id tid )
+	{
+		std::stringstream ss;
+		ss << tid ;
+		std::string strId(ss.str());
+		
+		return strId;
+	} ;
   
 private:
     tcp::socket m_socket;
+	boost::atomic<int> m_quest_activities;
 };
 
 class Server
