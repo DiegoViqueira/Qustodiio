@@ -123,13 +123,13 @@ build\QustodioCient.exe -f sample1.log
 ## Console Output Example
 
 ```
-every 5 second the server will print the qtty of ofensive words and each Message
+every 5 second the server will print the qtty of offensive words and each Message
 
-Message print:
-[1d9c]OFFENCIVE WORDS IN[device: c0-a0-39-6e-c8-8e][url: http://tubeboobsxxx.com/content][timestamp: 1397656906]
+Inappropiate Message print:
+   [1d9c]OFFENCIVE WORDS IN[device: c0-a0-39-6e-c8-8e][url: http://tubeboobsxxx.com/content][timestamp: 1397656906]
 
-
-Inapropiate Activities in last 5 seconds: 80
+inappropriate qtty Report:
+   Inapropiate Activities in last 5 seconds: 80
 
 ```
 ## Authors
