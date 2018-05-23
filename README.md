@@ -123,7 +123,12 @@ build\QustodioCient.exe -f sample1.log
 ## Console Output Example
 
 ```
+
+In case that offensice word was found the server will print 
 [8dc]OFFENCIVE WORDS IN[device: c0-a0-39-6e-c8-8e][url: https://bieber.net/index.html][timestamp: 1397656830]
+
+every 1 second the server will print the qtty of ofensive word that each connection processed
+[2af0] Consumer[b48] Offensive activities last Second [40]
 ```
 ## Authors
 
