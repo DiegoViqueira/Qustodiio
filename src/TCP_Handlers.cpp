@@ -1,17 +1,16 @@
 
 #include <regex>
 #include "TCP_Handlers.hpp"
-#include "Protocol.hpp"
+
 
 using namespace std;
 
 
 Session::~Session() 
 {
-	
-	//delete the Consumer reporter
-	Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
+		
 };
+
 
 void Session::start() 
 {
@@ -19,10 +18,7 @@ void Session::start()
 
    try
 	  {
-		//register as a Consumer Reporter
-        std::shared_ptr<Reporter>  spReporter = Reporter::getInstance();
 		
-		spReporter->register_consumer( get_strID( boost::this_thread::get_id() ),shared_from_this());
 		cout <<"["<< boost::this_thread::get_id()<< "]"<<" New Connection from :" << m_socket.remote_endpoint().address().to_string()  << endl;
 		
 		//Regular expression Patterns
@@ -58,9 +54,14 @@ void Session::start()
 				  */
 				  if (std::regex_search(temp_request.getURL(), self_regex)) 
 				  {
-					 //increment counter
-					m_quest_activities++;					 
-					 std::cout <<"["<< boost::this_thread::get_id()<< "]" << "OFFENCIVE WORDS IN[" << temp_request.getDevice()<<"]" << "[" << temp_request.getURL()<<"]"<< "[" << temp_request.getTimestamp()<<"]" << endl;
+					//std::cout <<"["<< boost::this_thread::get_id()<< "]" << "OFFENCIVE WORDS IN[" << temp_request.getDevice()<<"]" << "[" << temp_request.getURL()<<"]"<< "[" << temp_request.getTimestamp()<<"]" << endl;
+		
+				    //obtain the singleton  Reporter
+					std::shared_ptr<Reporter>  spReporter = Reporter::getInstance();
+		
+					//store the inapropiate message to process it later
+					spReporter->notify_msg(temp_request);
+					
 				  }
 
 				  //Send Responce
@@ -80,10 +81,9 @@ void Session::start()
 	  catch (std::exception& e)
 	  {
 		std::cerr << "Exception in thread: " << e.what() << "\n";
-		Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
+		
 	  }
 	  
-	  //Reporter::getInstance()->erase_consumer( get_strID(boost::this_thread::get_id()) );
 }
 
 

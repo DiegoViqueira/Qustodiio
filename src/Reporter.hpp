@@ -17,21 +17,10 @@
 #include <memory>
 #include <mutex>
 #include <boost/thread/thread.hpp>
+#include "Protocol.hpp"
+#include <queue>
 
-// Abstract Class for Consumers of Reporter
-class Consumer
-{
-	public:
-	
-	//Destructor
-	virtual ~Consumer(){};
-	
-	//get the statistics for a consumer
-	virtual int getStatistics() = 0 ;
-	
-};
-
-// Singleton for monitoring
+// Singleton for monitoring and Queueing Messages
 class Reporter
 {
 	public:
@@ -40,20 +29,18 @@ class Reporter
 	//Destructor
 	~Reporter();
 	
-	//register a Consumer 
-	void register_consumer (  const std::string &ConsumerName , std::shared_ptr<Consumer> spConsumer );
-	
-	//Erase a Consumer
-	void erase_consumer ( const std::string &ConsumerName );
-	
+	//Notify Message offensive
+    bool notify_msg(const Request& oRequest);	
 	//start runing Process
 	void run();
 	
 	private:
-		//Map of Consumers
-		std::map < std::string , std::shared_ptr<Consumer> > mConsumers; 
-		//Mutex for lock Container
-		std::mutex _mutex;
+	//Mutex for lock Container
+	std::mutex _mutex;
+	
+	//Queue of Messages
+	std::queue<Request>  m_queue;
+    
 };
 
 
